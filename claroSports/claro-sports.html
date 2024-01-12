@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Exo&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            background-image: url('background.jpg');
+            font-family: 'Exo', sans-serif;
+        }
+        table {
+            border-spacing: 0;
+        }
+        td {
+            padding: 0;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: black;
+            padding: 10px 20px;
+            z-index: 1000;
+        }
+        
+        .main {
+            background-color: #000;
+            margin: 75px auto;
+            width: 100%;
+            max-width: 100%;
+            border-spacing: 5px;
+            font-family: 'Exo', sans-serif;
+            color: #171a1b;
+        }
+
+        h1 {
+            margin-left: 50px;
+            text-align: center;
+            color: #fff;
+            justify-content: center;
+            font-size: 3.2rem;
+            font-weight: 700;
+        }
+        
+
+        #countdown {
+            margin-left: 50px;
+            font-size: 40px;
+            text-align: center;
+            justify-content: center;
+            color: #fff;
+            padding: 50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+        }
+
+        .container {
+            background-color: #171a1b;
+            width: 100%;
+            padding: 0 0 30px;
+        }
+
+        .video {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+            list-style-type: none;
+        }
+
+        li {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        li img {
+            width: 100px;
+            height: 100px;
+        }
+
+        p {
+            justify-content: center;
+            color: #fff;
+            height: 5px;
+            width: 100px;
+            text-align: center;
+            align-items: center;
+        }
+
+        .active {
+            border: none;
+        }
+
+        footer {
+        position: fixed;
+        top: 90%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50px;
+        background-color: black;
+        color: white;
+        display: inline-flex;
+        justify-content: space-between;
+        padding: 1px 30px 100px;
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-sochi-color.png" alt="">
+        <a href="#"><img src="logo-claro-sports.png" alt=""></a>
+    </header>
+    <table class="main" width="100%">
+       
+
+    </table>
+
+    <div>
+        <h1 width="600" style="max-width: 100%;">Faltan</h1>
+    </div>   
+
+    <div id="countdown">cuentaregresiva</div>
+
+    <div class="container">
+        <h1>CLARO SPORTS EN SOCHI 2014</h1>
+
+        <div class="video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/gVUs4oFKJmY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+
+            <ul>
+                <li><img src="team-latam.png" alt="" style="max-width: 130px""><p style="padding-bottom: 16px;">TEAM LATAM</p></li>
+                <li class="active" data-video-id="gVUs4oFKJmY"><img src="experiencia.png" alt="" style="max-width: 130px;"><p style="padding-bottom: 16px;">EXPERIENCIA MULTIMEDIA</p></li>
+                <li data-video-id="gVUs4oFKJmY"><img src="travel-meets-fashion.png" alt="" style="max-width: 130px;"><p style="padding-bottom: 16px;">TRAVEL MEETS FASHION</p></li>
+                <li data-video-id="gVUs4oFKJmY"><img src="velocidad-riesgo.png" alt="" style="max-width: 130px;"><p style="padding-bottom: 16px;">VELOCIDAD DE RIESGO</p></li>
+            </ul>
+
+    </div>
+
+    <footer width="100" style="max-width: 100;">
+        <a href="#"><p height="100px">Aviso de Privacidad/Contacto</p></a>
+        <img src="logo-sochi.png" alt="">
+        <img src="mobli-icon.png" alt="" style="width: 30px; height: 30px; padding: 15px 10px;">
+    </footer>
+
+    </table>
+
+    <script>
+        const countdownEl = document.getElementById('countdown');
+        const targetDate = new Date('2022-08-30T00:00:00');
+
+        function updateCountdown() {
+            const currentDate = new Date();
+            const difference = targetDate - currentDate;
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+    <script>
+        const videoContainer = document.querySelector('video');
+        const videoThumbnails = document.querySelectorAll('li');
+    
+        videoThumbnails.forEach(thumbnail => {
+          thumbnail.addEventListener('click', function() {
+            const currentActiveThumbnail = document.querySelector('.active');
+            currentActiveThumbnail.classList.remove('active');
+    
+            const videoId = this.getAttribute('data-video-id');
+            this.classList.add('active');
+    
+            videoContainer.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+          });
+        });
+     </script>
+
+    
+</body>
+</html>
